@@ -1,18 +1,45 @@
-/* style/glitch_theme.css */
+/* glitch_theme.css */
+
 body {
-    background-color: #0f0f0f;
-    color: #f0f0f0;
-    font-family: 'Courier New', monospace;
+  background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
+  color: #f0f0f0;
+  font-family: 'Poppins', sans-serif;
 }
 
-h1, h2 {
-    color: #f7f709;
-    text-shadow: 0 0 4px #ff0;
+h1, h2, h3 {
+  font-weight: 600;
+  background: linear-gradient(90deg, #ff00cc, #3333ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-code {
-    background-color: #111;
-    color: #f00;
-    padding: 5px;
-    border-radius: 4px;
+.stButton>button {
+  background-color: #6f00ff;
+  color: white;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.stButton>button:hover {
+  background-color: #ff0080;
+  transform: scale(1.05);
+}
+
+.stTextInput>div>input,
+.stSelectbox>div>div,
+.stSlider>div {
+  background-color: #222;
+  color: #fff;
+  border-radius: 8px;
+  padding: 10px;
+  border: 1px solid #555;
+}
+
+[data-testid="stMarkdownContainer"] pre {
+  background-color: #111;
+  color: #00ffcc;
+  border: 1px solid #333;
+  padding: 15px;
+  border-radius: 10px;
+  font-family: 'Courier New', monospace;
 }
