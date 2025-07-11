@@ -1,57 +1,54 @@
-# app.py
-
 import streamlit as st
 import json
 from datetime import datetime
 
-st.set_page_config(page_title="SkillGlitch AI", layout="centered")
+st.set_page_config(page_title="SkillGlitch AI", page_icon="🧠", layout="centered")
 
+# === HEADER ===
 st.title("🧠 SkillGlitch AI – Skill DNA Mapper")
 st.caption("Decode your skills. Learn through simulation bugs.")
 
-# --- Skill Input Section ---
+# === SKILL INPUT UI ===
 st.header("📥 Input Your Skills")
 
 strong_skills = st.text_input(
-    "🔰 List 3 topics you're STRONG at (comma-separated):",
-    placeholder="e.g. Artificial Intelligence, Prompt Engineering, Image Generation")
+    "📚 List 3 topics you're STRONG at (comma-separated):",
+    placeholder="e.g. Artificial Intelligence, Prompt Engineering, Image Generation"
+).split(",")
 
 weak_skills = st.text_input(
     "⚠️ List 3 topics you find WEAK or CONFUSING (comma-separated):",
-    placeholder="e.g. Deep Learning, Machine Learning, Logic Building")
+    placeholder="e.g. Deep Learning, Machine Learning, Logic Building"
+).split(",")
 
-confidence = st.slider("🧭 On a scale of 1–10, how confident are you overall in tech?", 1, 10, 7)
+confidence_level = st.slider(
+    "⏱️ On a scale of 1–10, how confident are you overall in tech?",
+    min_value=1, max_value=10, value=5
+)
 
-user_name = st.text_input("🙋 Your Name:", value="Thejo Karthikeya")
+if st.button("🧬 Generate My Skill DNA"):
+    name = "Thejo Karthikeya"  # Or make this a user input later
 
-# --- On Submit ---
-if st.button("🔍 Generate My Skill DNA"):
-    strong_list = [s.strip() for s in strong_skills.split(",") if s.strip()]
-    weak_list = [w.strip() for w in weak_skills.split(",") if w.strip()]
+    learning_style = "Simulation-driven storytelling with visual aids"
 
-    if len(strong_list) != 3 or len(weak_list) != 3:
-        st.error("⚠️ Please enter exactly 3 strong and 3 weak topics.")
-    else:
-        skill_profile = {
-            "name": user_name,
-            "timestamp": str(datetime.now()),
-            "strong_skills": strong_list,
-            "weak_skills": weak_list,
-            "confidence_level": confidence,
-            "learning_style": "Simulation-driven storytelling with visual aids",
-            "recommendations": {
-                "priority_focus": weak_list[0],
-                "style_suggestion": "Use glitch-based analogies + code story debugging"
-            }
+    Skill_profile = {
+        "name": name,
+        "timestamp": str(datetime.now()),
+        "strong_skills": [s.strip() for s in strong_skills if s.strip()],
+        "weak_skills": [w.strip() for w in weak_skills if w.strip()],
+        "confidence_level": confidence_level,
+        "learning_style": learning_style,
+        "recommendations": {
+            "priority_focus": weak_skills[0].strip() if weak_skills else "",
+            "style_suggestion": "Use glitch-based analogies + code story debugging"
         }
+    }
 
-        st.success("✅ Skill DNA Profile Generated!")
-        st.subheader("🧬 Your Skill DNA")
-        st.json(skill_profile)
+    st.success("✅ Skill DNA Profile Generated!")
+    st.json(Skill_profile, indent=2)
 
-        # Save to file (optional)
-        with open("skill_dna.json", "w") as f:
-            json.dump(skill_profile, f, indent=2)
+    # ✅ This line is necessary for Glitch Explainer to work!
+    st.session_state["Skill_DNA"] = Skill_profile
 
 # === DAY 3 – Glitch Explainer Engine ===
 st.markdown("---")
@@ -74,6 +71,3 @@ if "Skill_DNA" in st.session_state:
         st.write(f"✅ {glitch['fix_suggestion']}")
 else:
     st.warning("⚠️ Please generate your Skill DNA first to see glitch topics.")
-
-
-
