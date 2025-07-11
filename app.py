@@ -53,20 +53,24 @@ if st.button("🔍 Generate My Skill DNA"):
         with open("skill_dna.json", "w") as f:
             json.dump(skill_profile, f, indent=2)
 
-# DAY 3 – Glitch Explainer UI
+# === DAY 3 – Glitch Explainer Engine ===
 st.markdown("---")
 st.header("👾 Glitch Explainer Engine")
 
 st.caption("Pick a confusing topic. Let AI break it down like a simulation bug.")
 
-selected_topic = st.selectbox("🧩 Choose a weak topic:", weak_list)
+if "Skill_DNA" in st.session_state:
+    weak_list = st.session_state["Skill_DNA"]["weak_skills"]
 
-if st.button("⚡ Generate Glitch Explanation"):
-    from glitch_engine import generate_glitch_explanation
-    glitch = generate_glitch_explanation(selected_topic)
+    selected_topic = st.selectbox("🧩 Choose a weak topic:", weak_list)
 
-    st.subheader(glitch["title"])
-    st.markdown(f"```glitch\n{glitch['glitch']}\n```")
-    st.write(f"📖 **Understanding:** {glitch['deep_story']}")
-    st.write(f"✅ {glitch['fix_suggestion']}")
+    if st.button("⚡ Generate Glitch Explanation"):
+        from glitch_engine import generate_glitch_explanation
+        glitch = generate_glitch_explanation(selected_topic)
+
+        st.subheader(glitch["title"])
+        st.markdown(f"```glitch\n{glitch['glitch']}\n```")
+        st.write(f"📖 **Understanding:** {glitch['deep_story']}")
+        st.write(f"✅ {glitch['fix_suggestion']}")
+
 
