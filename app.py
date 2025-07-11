@@ -2,6 +2,8 @@ import streamlit as st
 import json
 from datetime import datetime
 
+with open("style/glitch_theme.css") as f:
+    st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 st.set_page_config(page_title="SkillGlitch AI", page_icon="🧠", layout="centered")
 
 # === HEADER ===
