@@ -1,5 +1,3 @@
-# glitch_engine.py
-
 import random
 
 def generate_glitch_explanation(topic):
