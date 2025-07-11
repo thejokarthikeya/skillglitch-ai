@@ -72,5 +72,8 @@ if "Skill_DNA" in st.session_state:
         st.markdown(f"```glitch\n{glitch['glitch']}\n```")
         st.write(f"📖 **Understanding:** {glitch['deep_story']}")
         st.write(f"✅ {glitch['fix_suggestion']}")
+else:
+    st.warning("⚠️ Please generate your Skill DNA first to see glitch topics.")
+
 
 
